@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import { render } from '@testing-library/react';
+import React, { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component{
+
+
+    constructor(props){
+        super(props);
+        this.state = {
+            hora: '00:00:00'
+        };
+
+    }
+
+    componentDidMount(){
+
+        setInterval(()=>{
+            this.setState({hora: new Date().toLocaleTimeString()})
+        },1000);
+    }
+
+
+    componentDidUpdate(){
+
+        //console.log('Atualizou');
+
+    }
+
+    
+    
+    render(){
+        return(
+            <div>
+                <h1>Projeto</h1>
+                <h3>{this.state.hora}</h3>
+            </div>
+        );
+    }
+    
+    
+    
 }
+
 
 export default App;
