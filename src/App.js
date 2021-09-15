@@ -1,47 +1,53 @@
-import { render } from '@testing-library/react';
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import api from './api';
 
 
 class App extends Component{
 
-
-    constructor(props){
-        super(props);
-        this.state = {
-            hora: '00:00:00'
-        };
-
+    state={
+        teste: [],
     }
 
-    componentDidMount(){
+    async componentDidMount(){
 
-        setInterval(()=>{
-            this.setState({hora: new Date().toLocaleTimeString()})
-        },1000);
+        const response = await api.get('');
+
+        console.log(response.data);
+
+        this.setState({ teste: response.data});
     }
 
-
-    componentDidUpdate(){
-
-        //console.log('Atualizou');
-
-    }
-
-    
-    
     render(){
+
+        const {teste} = this.state;
+        
+
+
         return(
             <div>
-                <h1>Projeto</h1>
-                <h3>{this.state.hora}</h3>
+                <h1>Ações MGLU3</h1>
+
+            {teste.map(teste => (
+                <li>
+                    <b>Data: {teste.DATPRG}</b>
+                    <br/>
+                    <br/>
+                     Abertura: {teste.PREABE}
+                     <br/>
+                     Fechamento: {teste.PREULT}
+                    <br/>
+                    <br/>
+                    <br/>
+                </li>
+                
+            ))}
+
+
             </div>
         );
     }
-    
-    
-    teste teste
-    
 }
+
 
 
 export default App;
