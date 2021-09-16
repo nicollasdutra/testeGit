@@ -12,28 +12,22 @@ class App extends Component{
 
     async componentDidMount(){
 
+        //essa parte pega a api de fora da bolsa de valores
         const response = await api.get('');
-
-        const opcao = {
-            
-                method: 'GET',
-                mode: 'no-cors',
-                headers: {
-                  'Access-Control-Allow-Origin': '*',
-                  'Content-Type': 'application/json',
-                },
-                //withCredentials: true,
-                //credentials: 'same-origin',
-              
-         }
-
-        const response2 = await apiDatabase.get('');
-
-        //console.log(response.data);
 
         this.setState({ teste: response.data});
 
+
+
+
+
+        //essa parte pega a api gerada no visual studio que traz a consulta SQL Server
+
+        const response2 = await apiDatabase.get('');
+
+        
         this.setState({ portal: response2.data});
+
     }
 
     render(){
